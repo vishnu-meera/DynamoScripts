@@ -1,0 +1,9 @@
+Perf 
+| where CounterName =="Free Megabytes"
+| extend FreeGB = CounterValue /1000
+
+Perf 
+| where CounterName =="Free Megabytes"
+| extend FreeGB = CounterValue /1000,
+         FreeKB = CounterValue * 1000,
+         FreeMB = CounterValue 

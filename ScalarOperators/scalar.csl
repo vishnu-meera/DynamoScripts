@@ -1,0 +1,74 @@
+print "hello World"
+print 11*8
+print now()
+
+print ago(1d), ago(1h), ago(1m), ago(1s), ago(1ms)
+
+//
+
+Perf
+| where TimeGenerated > ago(15m) 
+| where CounterName == "Avg. Disk sec/Read"
+    and InstanceName == "C:"
+| project Computer 
+        , TimeGenerated 
+        , ObjectName 
+        , CounterName 
+        , InstanceName 
+        , CounterValue 
+| sort by Computer , TimeGenerated
+
+
+Perf
+| where TimeGenerated > ago(15m) 
+| where CounterName == "Avg. Disk sec/Read"
+    and InstanceName == "C:"
+| project Computer 
+        , TimeGenerated 
+        , ObjectName 
+        , CounterName 
+        , InstanceName 
+        , CounterValue 
+| sort by Computer asc, TimeGenerated
+
+//wil get same output if we use
+
+
+Perf
+| where TimeGenerated > ago(15m) 
+| where CounterName == "Avg. Disk sec/Read"
+    and InstanceName == "C:"
+| project Computer 
+        , TimeGenerated 
+        , ObjectName 
+        , CounterName 
+        , InstanceName 
+        , CounterValue 
+| order by Computer asc, TimeGenerated
+
+// sort 
+Perf
+| where TimeGenerated > ago(15m) 
+| where CounterName == "Avg. Disk sec/Read"
+    and InstanceName == "C:"
+| project Computer 
+        , TimeGenerated 
+        , ObjectName 
+        , CounterName 
+        , InstanceName 
+        , CounterValue
+| sort by Computer asc, TimeGenerated
+
+
+//extract
+
+Perf
+| where ObjectName == "LogicalDisk"
+    and InstanceName matches regex "[A-Z]:" 
+| project Computer 
+        , CounterName 
+        , extract ("([A-Z]):", 1, InstanceName )
+
+
+//parse
+

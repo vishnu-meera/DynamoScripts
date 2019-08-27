@@ -1,0 +1,12 @@
+Perf |
+take 1
+
+Perf 
+| where TimeGenerated >= ago(1h)
+| where (
+            CounterName == "Bytes Received/sec"
+                or
+            CounterName  == "% Processor Time"
+        )
+| where CounterValue  > 0
+| count 

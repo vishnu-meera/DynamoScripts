@@ -1,0 +1,62 @@
+Perf |
+    where TimeGenerated >= ago(1h) 
+
+// ago allowa for relative date range. Ago says "start with right now then go back
+// in time N quantity. These can be expressed using the following abbrevations
+// d-days
+// h-hours
+// m-minutes
+// s-seconds
+// ms-milliseconds
+// microsecond - microseconds
+
+Perf 
+| where TimeGenerated >= ago(1h)
+    and CounterName  == "Bytes Received/sec"
+
+
+Perf 
+| where TimeGenerated >= ago(1h)
+    and (
+            CounterName == "Bytes Received/sec"
+                or
+            CounterName  == "% Processor Time"
+        )
+
+
+Perf 
+| where TimeGenerated >= ago(1h)
+    and (
+            CounterName == "Bytes Received/sec"
+                or
+            CounterName  == "% Processor Time"
+        )
+    and CounterValue  > 0
+
+//Stackable where operators
+Perf 
+| where TimeGenerated >= ago(1h)
+| where (
+            CounterName == "Bytes Received/sec"
+                or
+            CounterName  == "% Processor Time"
+        )
+| where CounterValue  > 0
+
+//simulate search with where
+Perf
+| where * has "bytes"
+
+
+Perf 
+| where * hasprefix "Bytes" 
+
+Perf 
+| where * hassuffix "Bytes" 
+
+Perf 
+| where * contains "Bytes" 
+
+
+Perf |
+where InstanceName matches regex "[A-Z]:" 

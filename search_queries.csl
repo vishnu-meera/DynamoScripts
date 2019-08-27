@@ -1,0 +1,19 @@
+Perf | search "memory"
+
+Perf | search kind=case_sensitive  "memory"
+
+search in (Perf,Event,Alert) "Contoso"
+
+Perf | search CounterName =="Available MBytes"
+
+Perf | search CounterName :"Mbytes"
+
+Perf | search * startswith "Bytes"
+
+Perf | search * endswith "Bytes"
+
+Perf | search "Free*bytes"
+
+Perf | search "Free*bytes" and ("C:" or "D:")
+
+Perf | search InstanceName matches regex "[A-Z]:"

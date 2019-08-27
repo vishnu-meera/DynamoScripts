@@ -1,0 +1,37 @@
+Perf
+| project ObjectName
+            , CounterName 
+            , InstanceName 
+            , CounterValue 
+            , TimeGenerated 
+
+            
+Perf
+| where CounterName == "Free Megabytes"
+| extend FreeGB  = CounterValue /1000
+        , FreeKB  = CounterValue *1000
+        , FreeMB  = CounterValue 
+| project ObjectName
+            , CounterName 
+            , InstanceName 
+            , TimeGenerated 
+            , FreeGB 
+            , FreeKB 
+            , FreeMB 
+
+Perf
+| where CounterName == "Free Megabytes"
+| project ObjectName
+            , CounterName 
+            , InstanceName 
+            , TimeGenerated 
+            , FreeGB  = CounterValue /1000
+            , FreeKB  = CounterValue *1000
+            , FreeMB  = CounterValue 
+
+
+//project-away
+//project-rename
+
+Perf
+| distinct ObjectName , CounterName

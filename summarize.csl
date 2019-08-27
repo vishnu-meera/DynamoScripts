@@ -1,0 +1,29 @@
+//summarize
+
+//Summarize allows you count number of rows by column using the count() aggregation function
+
+Perf
+| summarize count() by CounterName 
+
+Perf 
+| summarize count() by Computer 
+
+
+Perf
+| summarize PerfCount = count() by CounterName , ObjectName
+
+Perf 
+| where CounterName == "% Free Space"
+| summarize NoOfEntities = count(),
+            AverageFreeSpace = avg(CounterValue)
+            by CounterName 
+
+Perf
+| summarize Entries = count()
+    by bin(TimeGenerated, 1d)
+    
+
+Perf 
+| where CounterName == "% Free Space"
+| summarize NoOfRowsWithThisPercentLevel = count()
+    by bin(CounterValue, 10)
